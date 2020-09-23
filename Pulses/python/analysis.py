@@ -14,7 +14,6 @@ merge_bins = 1
 raw = True
 plotting = True
 fitting = True
-
 #plotting = False
 #fitting = False
 
@@ -28,10 +27,10 @@ def fit_pulse(trace):
     idx = idx[0][0]
     #x_values_peak = x_array[idx]
 
-    pname = [ 'Position','Amplitude','Width']
+    pname = [ 'Position','Width','Amplitude']
     mpv = x_array[idx]           # position of peak
-    amp = y_array.max()          # height of peak
     width = 1                    # width of peak
+    amp = y_array.max()          # height of peak
 
     # The uncertainty on the y-values is assumed to be the same for each separate bin otherwise
     # you have to specify the uncertainties explicitely
