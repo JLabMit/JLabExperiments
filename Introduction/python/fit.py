@@ -6,11 +6,11 @@ import matplotlib as mlp
 
 from scipy.stats import norm
 from scipy.optimize import curve_fit
+from scipy import stats
 
 from optparse import OptionParser
 
 g_norm = 1.0/np.sqrt(2*np.pi)
-
 
 #---------------------------------------------------------------------------------------------------
 # define and get all command line arguments
@@ -19,6 +19,15 @@ parser.add_option("-n", "--name",  dest="name",  default='fit',            help=
 parser.add_option("-x", "--xtitle",dest="xtitle",default='Default x title',help="x axis title")
 parser.add_option("-y", "--ytitle",dest="ytitle",default='Default y title',help="y axis title")
 (options, args) = parser.parse_args()
+
+def uncertainties(ys,patch=False):
+    # find uncertainties (simply sqrt of entries)
+    # - for fitting a 0 uncertainty does not work so we set it to 1000 to avoid chi2 contribution
+    sigmas = np.sqrt(ys)
+    for i in range(0,len(sigmas)): # if there are zero entries we get division by zero!
+        if sigmas[i] == 0 and patch:
+            sigmas[i] = 1000
+    return sigmas
 
 def straight_mean_var(data):
     # mean and variance from the raw data
@@ -31,7 +40,6 @@ def straight_mean_var(data):
     print " Width:    %f"%(np.sqrt(np.var(data)))
 
     return mean_raw,var_raw
-
 
 def gaussian(x, amplitude, mean, width):
     # Gaussian function, including a variable normalization, ready for your histogram fit
@@ -60,32 +68,53 @@ def fit_gaussian(xs,ys):
     y_array = np.array(ys)
 
     # find uncertainties (simply sqrt of entries)
-    sigma = np.sqrt(y_array)
-    for i in range(0,len(sigma)): # if there are zero entries we get division by zero!
-        if sigma[i] == 0:
-            sigma[i] = 100
-            #print " fix zero i:%d"%(i) 
+    sigmas = uncertainties(y_array,True) # patch uncertainties of 0
     
     # fit with uncertainties
     print "\n== Fit including uncertainties"
     pname = ['Amplitude', 'Mean', 'Width']
-    par, pcov = curve_fit(gaussian, x_array, y_array, p0=(500, 10, 2), sigma=sigma)
+    par, pcov = curve_fit(gaussian, x_array, y_array, p0=(500, 10, 2), sigma=sigmas)
     for i in range(0,3):
         print " P(%9s,%d): %f +- %f"%(pname[i],i,par[i],np.sqrt(pcov[i][i]))
 
-    return par, pcov
+    chi2,ndof = chi2_ndof(gaussian, par, x_array, y_array, sigmas)
+    prob = probability(chi2,ndof)
+    print(" Chi2: %f,  Ndof: %d"%(chi2,ndof))
+    print(" Prob: %f"%(prob))
+        
+    return par, pcov, prob
+
+def chi2_ndof(gaussian, par, x_array, y_array, sigma):
+    chi2 = 0.
+    ndof = len(par) * (-1.)
+    for x,y,sig in zip(x_array,y_array,sigma):
+        prediction = gaussian(x,par[0],par[1],par[2])
+        #print(" x: %f,  y: %f,  sig: %f, -- prediction: %f"%(x,y,sig,prediction))
+        if sig>0: # make sure we do not divide by zero
+            dChi2 = (y-prediction)*(y-prediction)/sig/sig
+            chi2 += dChi2
+            ndof += 1
+            #print("dChi2: %f"%(dChi2))
+        else:
+            print("WARNING - sigma=0: x: %f,  y: %f,  sig: %f, -- prediction: %f"%(x,y,sig,prediction))
+    return chi2, ndof
+
+def probability(chi2,ndof):
+    return (1.0 - stats.chi2.cdf(chi2,ndof))
 
 n_events = 500
 
 # generate some data for this demonstration.
-data = norm.rvs(10.0, 2.5, size=n_events)
+data = norm.rvs(20.0, 2.5, size=n_events)
 
 # calculate variables
 mean_raw,var_raw = straight_mean_var(data)
 
 # define the figure
-plt.figure(options.name)
-ns, bins, patches = plt.hist(data, 25, histtype = 'step', linewidth=2)
+fig = plt.figure(options.name,figsize=(6,6))
+#ns, bins, patches = plt.hist(data, 25, histtype = 'step', linewidth=2)
+ns, bins, patches = plt.hist(data, 25, histtype = 'step',color='w',alpha=.01)
+#ns, bins, patches = plt.hist(data, 25)
 
 # careful bin width matters for integral
 binwidth = bins[1]-bins[0]
@@ -107,9 +136,17 @@ for n,bmin in zip(ns,bins[:-1]):
     xs.append(bmin+0.5*binwidth)
     ys.append(n)
 
+# make a marker plot
+sigmas = uncertainties(ys)
+plt.scatter(xs, ys, label=label,color='black')      # markers
+plt.errorbar(xs,ys,yerr=sigmas,color='black',ls='none')   # error bars
+
 # now fit the data
 fit_gaussian_without(xs,ys)
-fit_gaussian(xs,ys)
+par,pcov,prob = fit_gaussian(xs,ys)
+
+ax = plt.gca()
+plt.text(0.02,0.90,r'P($\chi^2$,Ndof): %4.1f%%'%(prob*100),{'color': 'b'}, transform=ax.transAxes)
 
 # make plot nicer
 plt.xlabel(options.xtitle, fontsize=18)
