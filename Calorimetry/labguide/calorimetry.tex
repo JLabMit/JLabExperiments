@@ -1,0 +1,93 @@
+\documentclass[10pt,aps,twocolumn,secnumarabic,balancelastpage,amsmath,amssymb,nofootinbib,floatfix]{revtex4}
+
+%%\usepackage{setspace}
+%%\setstretch{1.25}
+\usepackage{graphicx}      % tools for importing graphics
+%\usepackage{lgrind}        % convert program code listings to a form 
+                            % includable in a LaTeX document
+%\usepackage{xcolor}        % produces boxes or entire pages with 
+                            % colored backgrounds
+%\usepackage{longtable}     % helps with long table options
+%\usepackage{epsf}          % old package handles encapsulated postscript issues
+\usepackage{bm}            % special bold-math package. usge: \bm{mathsymbol}
+%\usepackage{asymptote}     % For typesetting of mathematical illustrations
+%\usepackage{thumbpdf}
+
+\usepackage[colorlinks=true]{hyperref}  % this package should be added after 
+                                        % all others.
+                                        % usage: \url{http://web.mit.edu/8.13}
+
+\renewcommand{\baselinestretch}{1.0} 
+
+\begin{document}
+\title{Measurement of Specific Heat Capacities of Small Objects}
+\author{MIT Department of Physics}
+\email{nodbody\@mit.edu}
+\homepage{http://web.mit.edu/8.13/}
+\date{\today}
+%\affiliation{MIT Department of Physics}
+
+%-------------------------------------------------------------------------------
+\begin{abstract}
+  The objective of this experiment is to measure the specific heat capacity of various small objects using a simple self made calorimeter.  To determine the specific heat capacity we use the known specific heat capacity of water, measure mass and temperatures and finally apply the first law of thermodynamics.
+\end{abstract}
+
+\maketitle
+
+%-------------------------------------------------------------------------------
+\section*{Preparatory questions}
+
+\begin{enumerate}
+\item
+\end{enumerate}
+
+%-------------------------------------------------------------------------------
+\section{Introduction and Theory}
+
+The concept of warm and cold and by extension temperature is something every living creature learns very early on in life. It was only in the mid sixteen hundreds that physics studied the phenomenon of temperature and heat systematically in a field that is known as thermodynamics. It turns out that heat is a rather complex concept; it refers to energy in transfer from or to a system
+which is neither classified as work nor transfer of matter. The concept of heat eventually allowed to formulate the first law of thermodynamics which states fundamentally that energy is conserved~\cite{BailynThermo}: 'In a process without transfer of matter, the change in internal energy, $\Delta U$, of a thermodynamic system is equal to the energy gained as heat, $Q$, less the thermodynamic work, $W$, done by the system on its surroundings.' or in a formula:
+$$
+\Delta U = Q - W
+$$
+
+%-------------------------------------------------------------------------------
+\section{Procedure}
+
+\begin{itemize}
+\item[1.] Obtain a string of length $\ell$ and a weight of mass $m$.
+\item[2.] Measure the length of the pendulum to the middle of the pendulum bob.  Record the length of the pendulum.
+\item[3.] Set the pendulum in motion until it completes $N$ complete oscillations, taking care to record this time. Then the period $T$ for one oscillation is just the number recorded divided by $N$.
+\item[4.] Make a total of eight measurements for $g$ using two different masses at four different values for the length $\ell$.
+\item[5.] Determine a mean value for $g$ and determine the uncertainty $\Delta g$ in the measurement.
+\item[6.] Report $g \pm \Delta g$ and conclude.
+\end{itemize}
+
+%-------------------------------------------------------------------------------
+\section{Investigating the Small Angle Approximation}
+
+
+%-------------------------------------------------------------------------------
+\section{Other uncertainties to consider}
+
+There are a number of auxiliary measurements that have to be perfromed to setup and perform the complete experiment. There is the length of the pendulum, and the time for the
+oscillations. Both have to be done carefully and various options should be considered.
+
+Please, carefully propagate the uncertainty on period measurements and length measurements into your final result.
+
+To reduce the uncertainty it is useful for each setup to make several measurements and average those. It is important to make sure those setups are reproducible as to not average values of different setups.
+
+\subsection{Length of the pendulum}
+
+The length of the pendulum has to be carefully determined. There are two points that are of importance: the suspension point and the bob itself. Also you have to consider the accuracy of the meter you are using.
+
+Please, make sure to think about the bob. Does the size of the bob matter? You might want to try different sizes. Also is the derivation of the period correct for large bobs?
+
+\subsection{Measurement of the time}
+
+To measure the period one has to decide on a start and stop time. It is critical to define those times well. Which point of the trajectory is more precise, the point of maximal displacement or the point of highest velocity? Should you measure one period or several at once? As experimentalists it is best to think and then try. Can you improve your strategy and what is the resulting uncertainty?
+
+Also, everybody today has cell phones, a recording might be even more precise.
+
+\bibliography{calorimetry}
+
+\end{document}
