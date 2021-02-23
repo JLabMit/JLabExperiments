@@ -33,11 +33,11 @@ def straight_mean_var(data):
     # mean and variance from the raw data
     mean_raw = np.mean(data)
     var_raw = np.var(data)
-    print "\n-- No fit"
-    print " Nevents:  %d"%(len(data))
-    print " Mean:     %f +- %f"%(np.mean(data),np.sqrt(np.var(data)/len(data)))
-    print " Variance: %f"%(np.var(data))
-    print " Width:    %f"%(np.sqrt(np.var(data)))
+    print("\n-- No fit")
+    print(" Nevents:  %d"%(len(data)))
+    print(" Mean:     %f +- %f"%(np.mean(data),np.sqrt(np.var(data)/len(data))))
+    print(" Variance: %f"%(np.var(data)))
+    print(" Width:    %f"%(np.sqrt(np.var(data))))
 
     return mean_raw,var_raw
 
@@ -55,9 +55,9 @@ def fit_gaussian_without(xs,ys):
     # fit without uncertainties
     pname = ['Amplitude', 'Mean', 'Width']
     par, pcov = curve_fit(gaussian, x_array, y_array, p0=(500, 10, 2))
-    print "\n== Fit without including uncertainties"
+    print("\n== Fit without including uncertainties")
     for i in range(0,3):
-        print " P(%9s,%d): %f +- %f"%(pname[i],i,par[i],np.sqrt(pcov[i][i]))
+        print(" P(%9s,%d): %f +- %f"%(pname[i],i,par[i],np.sqrt(pcov[i][i])))
 
     return par, pcov
 
@@ -71,11 +71,11 @@ def fit_gaussian(xs,ys):
     sigmas = uncertainties(y_array,True) # patch uncertainties of 0
     
     # fit with uncertainties
-    print "\n== Fit including uncertainties"
+    print("\n== Fit including uncertainties")
     pname = ['Amplitude', 'Mean', 'Width']
     par, pcov = curve_fit(gaussian, x_array, y_array, p0=(500, 10, 2), sigma=sigmas)
     for i in range(0,3):
-        print " P(%9s,%d): %f +- %f"%(pname[i],i,par[i],np.sqrt(pcov[i][i]))
+        print(" P(%9s,%d): %f +- %f"%(pname[i],i,par[i],np.sqrt(pcov[i][i])))
 
     chi2,ndof = chi2_ndof(gaussian, par, x_array, y_array, sigmas)
     prob = probability(chi2,ndof)
