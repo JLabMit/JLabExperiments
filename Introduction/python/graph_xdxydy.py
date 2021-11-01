@@ -46,8 +46,11 @@ parser.add_option("-y", "--ytitle",dest="ytitle",default='Default y title',help=
 
 # define the figure
 plt.figure(options.name)
-plt.scatter(xs, ys, label = 'default curve')      # markers
+plt.scatter(xs, ys, label = '')      # markers
 plt.errorbar(xs,ys,xerr=dxs,yerr=dys,ls='none')   # error bars
+
+#zeros = np.zeros(len(xs))
+#plt.plot(xs,zeros,'k')
 
 # make axis titles
 plt.xlabel(options.xtitle, fontsize=18)

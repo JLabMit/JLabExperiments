@@ -11,39 +11,62 @@ mlp.rcParams['axes.linewidth'] = 2
 
 #---------------------------------------------------------------------------------------------------
 def readDataFromFile(file_name): 
-        
+
+    print ' File: %s'%(file_name)
+    
     # arrays for y values
-    xs = []
-    ys = []
+    diameters = []
+    d_diameters = []
+    heights = []
+    d_heights = []
+    volumes = []
+    d_volumes = []
 
     # read all data in one shot
-    print(" Open file: %s"%(file_name))
     with open(file_name,"r") as file:
         data = file.read()
 
     # go through each row
     for line in data.split("\n"):
-        f = line.split(',')                               # use a comma to separate columns
-        if len(f)>1 and len(line)>0 and line[0] != '#':   # protect against not well formatted lines
-             xs.append(float(f[0]))
-             ys.append(float(f[1]))
+        f = line.split(',')                                # use a comma to separate columns
+        #print " Len %d"%(len(f))
+        #print f
+        if len(f)>6 and len(line)>0 and line[0] != '#':    # protect against not well formatted lines
+            diameters.append(float(f[1]))
+            d_diameters.append(float(f[2]))
+            heights.append(float(f[3]))
+            d_heights.append(float(f[4]))
+            volumes.append(float(f[5]))
+            d_volumes.append(float(f[6]))
 
-    return (xs,ys)
+    # make a hash array for easy access
+    measurements = {}
+    measurements['diameters'] = diameters
+    measurements['d_diameters'] = d_diameters
+    measurements['heights'] = heights
+    measurements['d_heights'] = d_heights
+    measurements['volumes'] = volumes
+    measurements['d_volumes'] = d_volumes
+
+    return measurements
+
 
 #---------------------------------------------------------------------------------------------------
 # define and get all command line arguments
 parser = OptionParser()
-parser.add_option("-n", "--name",  dest="name",  default='graph_xy',       help="name of plot")
+parser.add_option("-n", "--name",  dest="name",  default='diameters',      help="name of plot")
 parser.add_option("-x", "--xtitle",dest="xtitle",default='Default x title',help="x axis title")
 parser.add_option("-y", "--ytitle",dest="ytitle",default='Default y title',help="y axis title")
 (options, args) = parser.parse_args()
 
 # get my data
-(xs,ys) = readDataFromFile(options.name+".dat")
+measurements = readDataFromFile("coin.dat")
+values = measurements[options.name]
+#print diameters
 
 # define the figure
 plt.figure(options.name)
-plt.plot(xs,ys,marker="o",ls='dashed')
+n, bins, patches = plt.hist(values, 20, histtype='step', linewidth=2.0)
 
 # make plot nicer
 plt.xlabel(options.xtitle, fontsize=18)
