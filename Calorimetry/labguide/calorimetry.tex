@@ -17,6 +17,7 @@
                                         % all others.
                                         % usage: \url{http://web.mit.edu/8.13}
 
+\newcommand{\C}{\ensuremath{^\circ\,\text{C}}} 
 \renewcommand{\baselinestretch}{1.0} 
 
 \begin{document}
@@ -36,57 +37,95 @@
 
 %-------------------------------------------------------------------------------
 \section*{Preparatory questions}
-
-\begin{enumerate}
-\item
-\end{enumerate}
+There is no preparatory work required, except for remembering basic thermodynamics~\cite{Thermodynamics}.
 
 %-------------------------------------------------------------------------------
 \section{Introduction and Theory}
 
-The concept of warm and cold and by extension temperature is something every living creature learns very early on in life. It was only in the mid sixteen hundreds that physics studied the phenomenon of temperature and heat systematically in a field that is known as thermodynamics. It turns out that heat is a rather complex concept; it refers to energy in transfer from or to a system
-which is neither classified as work nor transfer of matter. The concept of heat eventually allowed to formulate the first law of thermodynamics which states fundamentally that energy is conserved~\cite{BailynThermo}: 'In a process without transfer of matter, the change in internal energy, $\Delta U$, of a thermodynamic system is equal to the energy gained as heat, $Q$, less the thermodynamic work, $W$, done by the system on its surroundings.' or in a formula:
-$$
+% Introduction
+The concept of warm and cold and by extension temperature is something every living creature learns very early on in life, but it was only in the mid sixteen hundreds that physics studied the phenomenon of temperature and heat systematically in a field that is known as thermodynamics. It turns out that heat is a rather complex concept; it refers to energy in transfer from or to a system which is neither classified as work nor as transfer of matter. If there is no net heat transferred in a system it is said to be in thermal equilibrium which means that the temperature in the system is uniform in space and constant in time, which is sometimes referred to as the zeroth law of thermodynamics.
+
+% Theory
+The concept of heat eventually allowed to formulate the first law of thermodynamics which states fundamentally that energy is conserved~\cite{BailynThermo}: 'In a process without transfer of matter, the change in internal energy, $\Delta U$, of a thermodynamic system is equal to the energy gained as heat, $Q$, less the thermodynamic work, $W$, done by the system on its surroundings.' or in a formula:
+\begin{equation}\label{eq:first-law}
 \Delta U = Q - W
+\end{equation}
+The direct consequence of the first law of thermodynamics is that if heat is added to a closed system, that does not do work, the change of the internal energy is equal to the heat added. In the most simple setup a system absorbs heat by increasing its temperature~\footnote{State changes, chemical reactions or nuclear interactions are other mechanisms how heat can be absorbed or emitted}. The increase in temperature depends on the material. Each material has a specific heat capacity, $C_P$, which is the amount of heat required to increase the temperature of one unit of this material by one unit of temperature. To first approximation we can use a linear relationship between the temperature increase and the change of the internal energy which results in the following relationship
 $$
+dQ = C_P dU \ ,
+$$
+For example, the specific heat of water at room temperature ($25^\circ$~C) is~\cite{EnergyAndLight}:
+$$
+C_{P,\text{water}} = 4179.6 \frac{\text{J}}{\text{kg K}} \ .
+$$
+The specific heat capacity is a useful material property for engineering purposes because it allows for rather detailed descriptions of real life systems like buildings, streets, bridges or motors. It has its limitations, because the specific heat capacity does depend on other quantities and does not describe state transitions or chemical reactions. For solids and liquids it works rather well around room temperatures. Also gases can be assigned a specific heat capacity, but it requires the careful inclusion of work once the gas volume is not kept constant, following the first law of thermodynamics~(\ref{eq:first-law}).
+
+Using the specific heat of a given amount of known material we determine the amount of heat transferred from an unknown material to it from an initial to a final state by measuring the temperature differences. This allows us to derive the specific heat capacity of the unknown material when in the final state a thermal equilibrium is reached.
+
+% Theory
+Specifically, we use water as our known material. In our initial state we have an object of material $X$ of mass $m_X$ at a temperature $t_{X,\text{i}} = 100^\circ$~C and a perfectly insulated container (calorimeter) filled with water of mass $m_\text{W}$ at room temperature, $t_{W,\text{i}}$. We immerse the object in the water and let the system reach a thermal equilibrium at a final temperature $t_\text{f}$. The first law of thermodynamics then tells us that the heat transferred in the process is given by:
+\begin{equation}\label{eq:heat-transfered}
+  C_{P,X} m_X  (T_{X,\text{i}} - T_\text{f}) = Q = C_{P,\text{W}} m_\text{W} (T_\text{f} - T_{W,\text{i}}) \ .
+\end{equation}
+With all other quantities known, the specific heat capacity of our material $X$ is then given as
+\begin{equation}\label{eq:cpx}
+  C_{P,X} = C_{P,\text{W}} \frac{m_\text{W}}{m_X} \frac{T_\text{f} - T_{W,\text{i}}}{T_{X,\text{i}} - T_\text{f}} \ .
+\end{equation}
+  
+%-------------------------------------------------------------------------------
+\section{Measuring specific heat capacities}
+
+To measure specific heat capacities we need to build a calorimeter which consist of a well insulted volume, a thermometer and a mechanism that allows to reach thermal equilibrium reasonably quickly. We fill the calorimeter with water to allow for reliable temperature measurements and fast approximation of thermal equilibrium.
+
+To create a reliable and well measurable temperature difference we heat the objects of choice to $100\C$ by immersing it into a bath of boiling water. To start the measurement the temperature of the water in the calorimeter is recorded before inserting the object and then again after adding the object into the water bath. Some time should have passed to allow for thermal equilibrium to be reached. It is in fact useful to watch the process of reaching thermal equilibrium by watching the temperature in the water to become stable.
 
 %-------------------------------------------------------------------------------
-\section{Procedure}
+\subsection{Apparatus}
 
-\begin{itemize}
-\item[1.] Obtain a string of length $\ell$ and a weight of mass $m$.
-\item[2.] Measure the length of the pendulum to the middle of the pendulum bob.  Record the length of the pendulum.
-\item[3.] Set the pendulum in motion until it completes $N$ complete oscillations, taking care to record this time. Then the period $T$ for one oscillation is just the number recorded divided by $N$.
-\item[4.] Make a total of eight measurements for $g$ using two different masses at four different values for the length $\ell$.
-\item[5.] Determine a mean value for $g$ and determine the uncertainty $\Delta g$ in the measurement.
-\item[6.] Report $g \pm \Delta g$ and conclude.
-\end{itemize}
+For relatively small chunks of material a coffee cup about half filled with water made of Styrofoam or other well insulating materials provide a good enough implementation of a calorimeter. A simple thermometer and a light plastic stick for steering the cup will be sufficient. The water allows to create a thermal equilibrium quickly while at the same time providing a good coupling with the temperature sensor (thermometer). It is important to add a lid to the coffee cup to avoid evaporation and cooling by convection. The thermometer and steering device need to be carefully inserted not to break the insulation too much. For what concerns the steering, it might be sufficient to swirl the calorimeter; check our the life hacks in Reference~\cite{MixingWithoutSpoon}.
 
 %-------------------------------------------------------------------------------
-\section{Investigating the Small Angle Approximation}
+\subsection{Procedure}
 
+Choose a set of at least three suitable objects. They have to fit into the calorimeter but at the same time they should be as heavy/large as possible. To be able to make meaningful comparisons with literature values of the specific heat capacities~\cite{SpecificHeatCapacities} choose objects made from one material, like stone or metal. Other materials are possible but please consider that they have to be able to withstand temperatures up to $100\C$.
+
+It is important to be attentive and methodical when executing a series of measurement. Analyze each step, how it can be executed in a safe manner and with minimal impact on the final measurement. When carefully observing the process often issues arise and slight changes to the process will lead to much improved measurements. The below listed steps are not fully descriptive and require a lot of implementation details.
+
+\begin{enumerate}
+  \item Weight water in the calorimeter.
+  \item Weight object under study.
+  \item Measure water temperature in the calorimeter before placing object inside.
+  \item Heat object in boiling water bath (record room temperature and pressure) to reach $100\C$.
+  \item Transfer hot object into the calorimeter and close lid.
+  \item Stir the water until thermal equilibrium is reached.
+  \item Record temperature inside the calorimeter (water and object under study).
+\end{enumerate}
 
 %-------------------------------------------------------------------------------
-\section{Other uncertainties to consider}
+\section{Uncertainties to consider}
 
-There are a number of auxiliary measurements that have to be perfromed to setup and perform the complete experiment. There is the length of the pendulum, and the time for the
-oscillations. Both have to be done carefully and various options should be considered.
+To find the uncertainties in our determination of the specific heat capacity we have to carefully analyze our experimental setup, our procedure and our theoretical model, which tells us how the measurements we make are related with the physical quantity (specific heat capacity) we want to measure. In the following we are going to discuss in general terms what some of the main uncertainties are but this is not supposed to be an exhaustive list. It much depends on the details of the specific implementation of the experiment but there are a few important items listed as a starting point. Some of the uncertainties can be simply determined by looking at the accurary of a given device, others are more complicated and required a calibration, and some can only be determined by performing additional studies.
 
-Please, carefully propagate the uncertainty on period measurements and length measurements into your final result.
+% helping measurements
+First looking at our setup and procedure we identify two main ingredients: the masses (object under study and the water in the calorimeter) and the temperatures. Mass and temperature measurements are performed with devices that only provide a certain accuracy. This means, our scale and the thermometer need to be understood and maybe they need calibration. Further, as we are using boiling water we have to determine how precise the boiling temperature for our setup really is. It is well known that at great heights in the mountains water boils at lower temperatures.
 
-To reduce the uncertainty it is useful for each setup to make several measurements and average those. It is important to make sure those setups are reproducible as to not average values of different setups.
+% procedure
+Looking at our procedure and in particular when we execute it we can see that things are not perfect. How much does the object actually cool down during the time we extract it from the boiling water and before we submerge it in the water inside of the calorimeter? Also, the object is certainly not dry and thus some of the boiling water is also transfered into the calorimeter.
 
-\subsection{Length of the pendulum}
+% model
+For our theoretical model we assume that no heat is transfered outside of our system: water inside the calorimeter and object of study. In reality the calorimeter itself and the thermometer are also changing their temperature and some of the heat is even lost to the environment through the calorimeter wall. We also have to assume that thermodynamic equilibrium is really reached when we read the final temperature.
 
-The length of the pendulum has to be carefully determined. There are two points that are of importance: the suspension point and the bob itself. Also you have to consider the accuracy of the meter you are using.
+% summary
+All of those are examples of effects that impact your final measurement. Depending on how you design your calorimeter those effects might be important or not so much. It is essential that you get a 'feel' for your setup by studying those effects, so you can quote a reliable uncertainty. A result of those study are often changes to the setup and procedure, which allows one to reduce the systematic uncertainties. It is always useful for each setup/procedure to make several measurements and average those but always ensure that the measurements are well controlled so you can perform an average. It is important to make sure your single measurements are reproducible.
 
-Please, make sure to think about the bob. Does the size of the bob matter? You might want to try different sizes. Also is the derivation of the period correct for large bobs?
+%-------------------------------------------------------------------------------
+\subsection{Measure heat loss as a function of temperature difference}
 
-\subsection{Measurement of the time}
+To illustrate how we can learn more about our specific setup we measure the heat loss of our calorimeter as a function of the water temperature and the environment. Therefore we will have to create a stable environment, which refers primarily to the room temperature and the airflow around the cup, both of which have major implications on the heat loss of our calorimeter.
 
-To measure the period one has to decide on a start and stop time. It is critical to define those times well. Which point of the trajectory is more precise, the point of maximal displacement or the point of highest velocity? Should you measure one period or several at once? As experimentalists it is best to think and then try. Can you improve your strategy and what is the resulting uncertainty?
+A series of measurements of the temperature with respect to time will allow us to determine the heat loss of our calorimeter to the environment. Perform the measurement for at least five different water temperatures and Provide a plot temperature versus time. The proposed temperatures are roughly $20\C$, $25\C$, $30\C$, $35\C$, and $40\C$.
 
-Also, everybody today has cell phones, a recording might be even more precise.
+Determine how you can use those measurements to improve your measurement of the specific heat capacity.
 
 \bibliography{calorimetry}
 
