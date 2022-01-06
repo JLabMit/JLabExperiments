@@ -39,7 +39,8 @@ parser = OptionParser()
 parser.add_option("-n", "--name",  dest="name",  default='graph_xdxydy',   help="name of plot")
 parser.add_option("-x", "--xtitle",dest="xtitle",default='Default x title',help="x axis title")
 parser.add_option("-y", "--ytitle",dest="ytitle",default='Default y title',help="y axis title")
-parser.add_option("-l", "--logy",action="store_true",dest="logy",default=False,help="logarithmic y scale")
+parser.add_option("-l", "--logx",action="store_true",dest="logx",default=False,help="logarithmic x scale")
+parser.add_option("-L", "--logy",action="store_true",dest="logy",default=False,help="logarithmic y scale")
 (options, args) = parser.parse_args()
 
 # get my data
@@ -74,6 +75,8 @@ plt.savefig(options.name+".png",bbox_inches='tight',dpi=400)
 plt.savefig(options.name+".png",bbox_inches='tight',dpi=400)
 
 # show the plot for interactive use
+if options.logx:
+    plt.xscale("log")
 if options.logy:
     plt.yscale("log")
     
