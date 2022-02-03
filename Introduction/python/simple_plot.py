@@ -20,7 +20,7 @@ ax.plot(t,s)
 ax.set(xlabel='time [s]',ylabel='voltage [mV]',title='As simple as it gets')
 
 # Save the figure
-fig.savefig('simple_plot.png')
+fig.savefig('../png/simple_plot.png')
 
 # Show the plot that was created
 plt.show()

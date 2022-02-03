@@ -44,7 +44,7 @@ parser.add_option("-L", "--logy",action="store_true",dest="logy",default=False,h
 (options, args) = parser.parse_args()
 
 # get my data
-(xs,dxs,ys,dys) = readDataFromFile(options.name+".dat")
+(xs,dxs,ys,dys) = readDataFromFile("../dat/"+options.name+".dat")
 
 # define the figure
 plt.figure(options.name)
@@ -69,10 +69,7 @@ leg = plt.legend(loc="lower left",frameon=False)
 plt.subplots_adjust(top=0.99, right=0.99, bottom=0.13, left=0.12)
 
 # save plot for later viewing
-plt.savefig(options.name+".png",bbox_inches='tight',dpi=400)
-
-# save plot for later viewing
-plt.savefig(options.name+".png",bbox_inches='tight',dpi=400)
+plt.savefig("../png/"+options.name+".png",bbox_inches='tight',dpi=400)
 
 # show the plot for interactive use
 if options.logx:

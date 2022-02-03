@@ -39,7 +39,7 @@ parser.add_option("-y", "--ytitle",dest="ytitle",default='Default y title',help=
 (options, args) = parser.parse_args()
 
 # get my data
-(xs,ys) = readDataFromFile(options.name+".dat")
+(xs,ys) = readDataFromFile("../dat/"+options.name+".dat")
 
 # define the figure
 plt.figure(options.name)
@@ -57,7 +57,7 @@ plt.yticks(fontsize=14)
 plt.subplots_adjust(top=0.99, right=0.99, bottom=0.13, left=0.12)
 
 # save plot for later viewing
-plt.savefig(options.name+".png",bbox_inches='tight',dpi=400)
+plt.savefig("../png/"+options.name+".png",bbox_inches='tight',dpi=400)
 
 # show the plot for interactive use
 plt.show()

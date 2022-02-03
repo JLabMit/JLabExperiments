@@ -12,7 +12,7 @@ mlp.rcParams['axes.linewidth'] = 2
 #---------------------------------------------------------------------------------------------------
 def readDataFromFile(file_name): 
 
-    print ' File: %s'%(file_name)
+    print(' File: %s'%(file_name))
     
     # arrays for y values
     diameters = []
@@ -29,8 +29,8 @@ def readDataFromFile(file_name):
     # go through each row
     for line in data.split("\n"):
         f = line.split(',')                                # use a comma to separate columns
-        #print " Len %d"%(len(f))
-        #print f
+        #print(" Len %d"%(len(f)))
+        #print(f)
         if len(f)>6 and len(line)>0 and line[0] != '#':    # protect against not well formatted lines
             diameters.append(float(f[1]))
             d_diameters.append(float(f[2]))
@@ -62,7 +62,7 @@ parser.add_option("-y", "--ytitle",dest="ytitle",default='Default y title',help=
 # get my data
 measurements = readDataFromFile("coin.dat")
 values = measurements[options.name]
-#print diameters
+#print(diameters)
 
 # define the figure
 plt.figure(options.name)
