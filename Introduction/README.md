@@ -6,9 +6,9 @@ Once you have completed this task you should be able to login to submit simply b
 
     ssh <user-name>@submit.mit.edu
 
-Make sure that you use the right user id when you login: it is the kerberos user id that you also use for touchstone authentication or login into athena.
+Make sure that you use the right user id when you login: it is the kerberos user id that you also use for touchstone authentication or for login into athena.
 
-The reommended tools for JLab are python based, either directly from the command line or using jupyter notebooks. You can run those all from your own laptop once you have all necessary packages installed. If you do not want to go through that trouble tou can run them immediately on submit. To install the githb package just login and install:
+The recommended tools for JLab are python based, either directly from the command line or using jupyter notebooks. You can run those all from your own laptop once you have all necessary packages installed. If you do not want to go through that trouble you can run them immediately on submit. To install this github package just login and install:
 
     git clone https://github.com/JLabMit/JLabExperiments
 
