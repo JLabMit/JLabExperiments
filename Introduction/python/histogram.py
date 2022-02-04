@@ -23,7 +23,7 @@ def readDataFromFile(file_name):
         if len(f)>0 and len(line)>0 and line[0] != '#':    # protect against not well formatted lines
              xs.append(float(f[0]))
 
-    return xs
+    return np.array(xs)
 
 #---------------------------------------------------------------------------------------------------
 # define and get all command line arguments
@@ -40,6 +40,9 @@ print(xs)
 # define the figure
 plt.figure(options.name)
 n, bins, patches = plt.hist(xs, 20, histtype='step', linewidth=2.0)
+
+# give the plot some head room
+plt.ylim(0,n.max()*1.1)
 
 # make plot nicer
 plt.xlabel(options.xtitle, fontsize=18)
