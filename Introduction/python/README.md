@@ -17,14 +17,14 @@ In this script we read the file histogram.dat (in Introduction/dat/) which conta
 In this script we read the file graph_xy.dat (in Introduction/dat/) which contains a two columns of values (x,y). Those values are read and then plotted in form of an xy-graph.
 
     cd Introduction/python
-    ./graph_xdxydy.py
+    ./graph_xy.py
 
 ## graph_xdxydy
 
 In this script we read the file graph_xdxydy.dat (in Introduction/dat/) which contains a four columns of values (x,dx,y,dy), so x and y values including their uncertainties. Those values are read and then plotted in form of an xy-graph.
 
     cd Introduction/python
-    ./histogram.py
+    ./graph_xdxydy.py
 
 ## fit
 
