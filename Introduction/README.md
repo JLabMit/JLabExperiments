@@ -1,6 +1,6 @@
 # Introduction
 
-In this section we present a collection of tools for data analysis that are ready to use on the login pool of the physics department, [the subMIT system](http://submit04.mit.edu/). To login you can quickly create yourself an account by going to the [submit portal](https://submit-portal.mit.edu/secure/app/keys) and upload your *public* ssh key. Checkout the detailed [users guide of submit](http://submit04.mit.edu/submit-users-guide/index.html).
+In this section we present a collection of tools for data analysis that are ready to use on the login pool of the physics department, [the subMIT system](http://submit04.mit.edu/). To login you can quickly create yourself an account by going to the [submit portal](https://submit-portal.mit.edu) and under the ssh key tab upload your *public* ssh key. Checkout the detailed [users guide of submit](http://submit04.mit.edu/submit-users-guide/index.html).
 
 Once you have completed this task you should be able to login to submit simply by using ssh:
 
